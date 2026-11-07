@@ -1,0 +1,1 @@
+{"_invocation_id": "12947cd3-a451-4dfb-863a-dec813edc3ae", "linked": {"0": {"name": "source.dbt_retail.retail.orders", "type": "source", "succ": [1]}, "1": {"name": "model.dbt_retail.transform_orders", "type": "model"}}}

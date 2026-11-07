@@ -1,0 +1,12 @@
+dbt_retail:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth # O puedes usar 'oauth' si prefieres autenticación interactiva local
+      keyfile: /opt/airflow/gcp_credentials.json # O la ruta a tu archivo application_default_credentials.json
+      project: data-engineer-509817
+      dataset: retail # Dataset donde dbt escribirá las tablas transformadas
+      threads: 4
+      timeout_seconds: 300
+      location: US # Cambia por la región de tu dataset si es diferente, ej: southamerica-east1
