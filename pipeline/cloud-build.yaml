@@ -1,0 +1,19 @@
+steps:
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        set -e
+        mkdir -p /workspace/_dags
+        cp -r dags/. /workspace/_dags/
+        cp -r services /workspace/_dags/services
+        find /workspace/_dags -name "__pycache__" -type d -prune -exec rm -rf {} +
+        gcloud storage rsync --recursive /workspace/_dags gs://${_COMPOSER_BUCKET}/dags
+        gcloud storage rsync --recursive data/schema gs://${_COMPOSER_BUCKET}/data/schema
+
+substitutions:
+  _COMPOSER_BUCKET: southamerica-west1-retail-o-a47457cf-bucket
+
+options:
+  logging: CLOUD_LOGGING_ONLY
