@@ -1,0 +1,26 @@
+[ 
+            { 
+                "name":"InvoiceNo", "type":"STRING", "mode":"NULLABLE"
+            }, 
+            { 
+                "name":"stock_code", "type":"string", "mode": "NULLABLE"
+            }, 
+            { 
+                "name": "Description", "type": "string" , "mode": "NULLABLE"
+            }, 
+            { 
+                "name": "Quantity", "type": "STRING", "mode": "NULLABLE"
+            }, 
+            {
+                "name": "InvoiceDate", "type": "STRING", "mode": "NULLABLE"
+            }, 
+            { 
+                "name": "UnitPrice", "type": "string", "mode": "NULLABLE"
+            }, 
+            { 
+                "name": "CustomerId", "type": "string", "mode": "NULLABLE"
+            }, 
+            { 
+                "name": "Country", "type": "string", "mode": "NULLABLE"
+            }
+        ]

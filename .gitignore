@@ -1,2 +1,15 @@
 .env
 /env 
+secrets/ 
+secrets 
+de-env/ 
+de-env 
+__pycache__/ 
+*.pyc 
+*logs
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
