@@ -55,14 +55,6 @@ tags=["csv", "retail"]
 ) as dag: 
 
     
-    load_file_to_gcs=LocalFilesystemToGCSOperator(
-        task_id="local_to_gcs", 
-        bucket="retail-online", 
-        src="/home/airflow/data/retail/Online_Retail.csv", 
-        dst="retail-online/online_retail", 
-        mime_type="text/csv", 
-        gcp_conn_id="google_cloud_default"
-    )
 
     check_file_in_bucket=ShortCircuitOperator(
             task_id='check_file_in_bucket', 
@@ -93,4 +85,4 @@ tags=["csv", "retail"]
         )
     
 
-    load_file_to_gcs >> check_file_in_bucket >>gcs_to_bigquery >> archive_file
+    check_file_in_bucket >>gcs_to_bigquery >> archive_file
