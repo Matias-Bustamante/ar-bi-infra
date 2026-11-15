@@ -7,6 +7,7 @@ from airflow.providers.standard.operators.python import  ShortCircuitOperator
 from datetime import datetime, timedelta
 import json
 from pathlib import Path 
+import os 
 from services.gcp.config import ( 
     BUCKET_NAME, 
     SOURCE_OBJECTS, 
@@ -19,8 +20,17 @@ def check_file_bucket()->bool:
     hook=GCSHook(gcp_conn_id=GCP_CONN_ID)
     return hook.exists(bucket_name=BUCKET_NAME, object_name=SOURCE_OBJECTS)
 
-SCHEMA_PATH=Path("/home/airflow/data/schema/retail/schema.json")
+def _resolve_data_dir() -> Path:
+    env_dir = os.environ.get("AIRFLOW_DATA_DIR")
+    if env_dir:
+        return Path(env_dir)
+    composer_dir = Path("/home/airflow/gcs/data")
+    if composer_dir.exists():
+        return composer_dir
+    return Path("/home/airflow/data")
 
+DATA_DIR = _resolve_data_dir()
+SCHEMA_PATH = DATA_DIR / "schema" / "retail" / "schema.json"
 with SCHEMA_PATH.open(encoding="utf-8") as f: 
     schema=json.load(f)
 
